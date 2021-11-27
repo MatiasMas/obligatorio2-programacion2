@@ -26,6 +26,9 @@ int getCedulaDelSocio(Socio socio);
 //Selectora de tieneHabilidad
 boolean getTieneHabilidad(Socio socio);
 
+//Setter tieneHabilidad
+void setTieneHabilidad(Socio &socio);
+
 //Selectora del nombre del socio
 void getNombre(Socio socio, stringd &nombre);
 

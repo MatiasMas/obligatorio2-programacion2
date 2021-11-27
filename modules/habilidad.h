@@ -13,8 +13,8 @@ typedef struct {
     TipoHabilidad tipoHabilidad;
 } Habilidad;
 
-//Cargar habilidad
-void cargarHabilidad(Habilidad &habilidad, ArbolSocios arbolSocios);
+//Cargar habilidad, Precondicion: Tiene que existir el socio
+void cargarHabilidad(Habilidad &habilidad, ArbolSocios arbolSocios, Socio &socio);
 
 //Desplegar toda la informacion de la habilidad
 void mostrarHabilidad(Habilidad habilidad);

@@ -47,11 +47,11 @@ boolean existeSocio(ArbolSocios arbolSocios, int cedula) {
     return encontrado;
 }
 
-Socio buscarSocioPorCedula(ArbolSocios arbolSocios, int cedulaMagica) {
+Socio *buscarSocioPorCedula(ArbolSocios arbolSocios, int cedulaMagica) {
 
     while (arbolSocios != NULL) {
         if (cedulaMagica == getCedulaDelSocio(arbolSocios->info)) {
-            return arbolSocios->info;
+            return &arbolSocios->info;
         } else {
             if (cedulaMagica < getCedulaDelSocio(arbolSocios->info)) {
                 arbolSocios = arbolSocios->hIzq;
@@ -61,95 +61,95 @@ Socio buscarSocioPorCedula(ArbolSocios arbolSocios, int cedulaMagica) {
         }
     }
 
-    return arbolSocios->info;
+    return &arbolSocios->info;
 }
 
 void
 contarSociosPorCategoria(ArbolSocios arbolSocios, int &contadorBrujos, int &contadorHadas, int &contadorHechiceros) {
 
-    contarSociosPorCategoria(arbolSocios->hIzq, contadorBrujos, contadorHadas, contadorHechiceros);
+    if (arbolSocios != NULL) {
+        contarSociosPorCategoria(arbolSocios->hIzq, contadorBrujos, contadorHadas, contadorHechiceros);
 
-    switch (getCategoriaMagica(arbolSocios->info)) {
-        case BRUJO:
-            contadorBrujos++;
-            break;
-        case HADA:
-            contadorHadas++;
-            break;
-        case HECHICERO:
-            contadorHechiceros++;
-            break;
+        switch (getCategoriaMagica(arbolSocios->info)) {
+            case BRUJO:
+                contadorBrujos++;
+                break;
+            case HADA:
+                contadorHadas++;
+                break;
+            case HECHICERO:
+                contadorHechiceros++;
+                break;
+        }
+
+        contarSociosPorCategoria(arbolSocios->hDer, contadorBrujos, contadorHadas, contadorHechiceros);
     }
-
-    contarSociosPorCategoria(arbolSocios->hDer, contadorBrujos, contadorHadas, contadorHechiceros);
 
 }
 
-int sociosNacidosAntesDeFecha(ArbolSocios arbolSocios, Fecha fechaNacimiento) {
-    int sociosNacidos = 0;
+void sociosNacidosAntesDeFecha(ArbolSocios arbolSocios, Fecha fechaNacimiento, int &sociosNacidos) {
 
-    sociosNacidosAntesDeFecha(arbolSocios->hIzq, fechaNacimiento);
+    if (arbolSocios != NULL) {
+        sociosNacidosAntesDeFecha(arbolSocios->hIzq, fechaNacimiento, sociosNacidos);
 
-    if (
-            (
-                    getDia(getFechaRegistro(arbolSocios->info)) <= getDia(fechaNacimiento) &&
-                    getMes(getFechaRegistro(arbolSocios->info)) <= getMes(fechaNacimiento) &&
-                    getAnio(getFechaRegistro(arbolSocios->info)) <= getAnio(fechaNacimiento)
-            ) ||
-            (
-                    getMes(getFechaRegistro(arbolSocios->info)) < getMes(fechaNacimiento) &&
-                    getAnio(getFechaRegistro(arbolSocios->info)) <= getAnio(fechaNacimiento)
-            ) ||
-            (
-                    getAnio(getFechaRegistro(arbolSocios->info)) < getAnio(fechaNacimiento)
-            )
-            ) {
-        sociosNacidos++;
+        if (
+                (
+                        getDia(getFechaRegistro(arbolSocios->info)) <= getDia(fechaNacimiento) &&
+                        getMes(getFechaRegistro(arbolSocios->info)) <= getMes(fechaNacimiento) &&
+                        getAnio(getFechaRegistro(arbolSocios->info)) <= getAnio(fechaNacimiento)
+                ) ||
+                (
+                        getMes(getFechaRegistro(arbolSocios->info)) < getMes(fechaNacimiento) &&
+                        getAnio(getFechaRegistro(arbolSocios->info)) <= getAnio(fechaNacimiento)
+                ) ||
+                (
+                        getAnio(getFechaRegistro(arbolSocios->info)) < getAnio(fechaNacimiento)
+                )
+                ) {
+            sociosNacidos++;
+        }
+
+        sociosNacidosAntesDeFecha(arbolSocios->hDer, fechaNacimiento, sociosNacidos);
+
     }
 
-    sociosNacidosAntesDeFecha(arbolSocios->hDer, fechaNacimiento);
-
-    return sociosNacidos;
 }
 
 void listarSocios(ArbolSocios arbolSocios) {
 
-    listarSocios(arbolSocios->hIzq);
+    if (arbolSocios != NULL) {
+        listarSocios(arbolSocios->hIzq);
 
-    mostrarSocio(arbolSocios->info);
+        mostrarSocio(arbolSocios->info);
 
-    listarSocios(arbolSocios->hDer);
+        listarSocios(arbolSocios->hDer);
+    }
 
 }
 
 void listarSociosSinHabilidades(ArbolSocios arbolSocios) {
 
-    listarSociosSinHabilidades(arbolSocios->hIzq);
+    if (arbolSocios != NULL) {
+        listarSociosSinHabilidades(arbolSocios->hIzq);
 
-    if (!arbolSocios->info.tieneHabilidad) {
-        mostrarSocio(arbolSocios->info);
+        if (!arbolSocios->info.tieneHabilidad) {
+            mostrarSocio(arbolSocios->info);
+        }
+
+        listarSociosSinHabilidades(arbolSocios->hDer);
     }
-
-    listarSociosSinHabilidades(arbolSocios->hDer);
-
-}
-
-void listarSocioMasPoderoso(ArbolSocios arbolSocios) {
-//    int cedulaSocioMasPoderoso = socioConMayorCantidadHabilidadesSobrenaturales(listaHabilidades);
-//
-//    mostrarSocio(*buscarSocioPorCedula(arbolSocios, cedulaSocioMasPoderoso));
 
 }
 
 void insertarSocio(ArbolSocios &arbolSocios, Socio socio) {
 
-    if(arbolSocios == NULL){
+    if (arbolSocios == NULL) {
         arbolSocios = new nodoSocio;
         arbolSocios->info = socio;
         arbolSocios->hIzq = NULL;
         arbolSocios->hDer = NULL;
     } else {
-        if(getCedulaDelSocio(socio) < getCedulaDelSocio(arbolSocios->info)){
+        if (getCedulaDelSocio(socio) < getCedulaDelSocio(arbolSocios->info)) {
             insertarSocio(arbolSocios->hIzq, socio);
         } else {
             insertarSocio(arbolSocios->hDer, socio);
@@ -157,3 +157,73 @@ void insertarSocio(ArbolSocios &arbolSocios, Socio socio) {
     }
 
 }
+
+boolean socioIngresado(ArbolSocios arbolSocios, Socio socio) {
+
+    if (arbolSocios == NULL) {
+        return FALSE;
+    } else {
+        if (getCedulaDelSocio(arbolSocios->info) == getCedulaDelSocio(socio)) {
+            return TRUE;
+        } else {
+            if (getCedulaDelSocio(socio) < getCedulaDelSocio(arbolSocios->info)) {
+                return socioIngresado(arbolSocios->hIzq, socio);
+            } else {
+                return socioIngresado(arbolSocios->hDer, socio);
+            }
+        }
+    }
+
+}
+
+Socio socioConMenorCedula(ArbolSocios arbolSocios) {
+
+    if (arbolSocios->hIzq == NULL) {
+        return arbolSocios->info;
+    } else {
+        return socioConMenorCedula(arbolSocios->hIzq);
+    }
+
+}
+
+void borrarSocioConMenorCedula(ArbolSocios &arbolSocios) {
+    ArbolSocios aux;
+
+    if (arbolSocios->hIzq == NULL) {
+        aux = arbolSocios->hDer;
+        delete arbolSocios;
+        arbolSocios = aux;
+    } else {
+        borrarSocioConMenorCedula(arbolSocios->hIzq);
+    }
+
+}
+
+void borrarSocio(ArbolSocios &arbolSocios, Socio socio) {
+    ArbolSocios aux;
+
+    if (getCedulaDelSocio(socio) == getCedulaDelSocio(arbolSocios->info)) {
+        if (arbolSocios->hDer == NULL) {
+            aux = arbolSocios->hIzq;
+            delete arbolSocios;
+            arbolSocios = aux;
+        } else {
+            if (arbolSocios->hIzq == NULL) {
+                aux = arbolSocios->hDer;
+                delete arbolSocios;
+                arbolSocios = aux;
+            } else {
+                arbolSocios->info = socioConMenorCedula(arbolSocios->hDer);
+                borrarSocioConMenorCedula(arbolSocios->hDer);
+            }
+        }
+    } else {
+        if (getCedulaDelSocio(socio) < getCedulaDelSocio(arbolSocios->info)) {
+            borrarSocio(arbolSocios->hIzq, socio);
+        } else {
+            borrarSocio(arbolSocios->hDer, socio);
+        }
+    }
+
+}
+

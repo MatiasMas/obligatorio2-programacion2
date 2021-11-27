@@ -126,7 +126,37 @@ void listarHabilidadesPorFecha(ListaHabilidades listaHabilidades, Fecha fechaMan
 int socioConMayorCantidadHabilidadesSobrenaturales(ListaHabilidades listaHabilidades) {
     ListaHabilidades aux = listaHabilidades;
     ListaHabilidades listaSecundaria = aux;
-    int cantidadMaxima = 0, cantidadHabilidades = 0, cedulaRetornar;
+    int cantidadMaxima = 0, cantidadHabilidades = 0, cedulaRetornar = 0;
+
+    while (listaHabilidades != NULL) {
+
+        while (listaSecundaria != NULL){
+
+            if(getCedulaMagica(listaHabilidades->info) == getCedulaMagica(listaSecundaria->info) && getTipoHabilidad(listaHabilidades->info) == SOBRENATURAL){
+                cantidadHabilidades++;
+            }
+
+            listaSecundaria = listaSecundaria->sig;
+        }
+
+        if(cantidadHabilidades > cantidadMaxima){
+            cantidadMaxima = cantidadHabilidades;
+            cedulaRetornar = getCedulaMagica(listaHabilidades->info);
+        }
+
+        cantidadHabilidades = 0;
+
+        listaSecundaria = aux;
+        listaHabilidades = listaHabilidades->sig;
+    }
+
+    return cedulaRetornar;
+}
+
+void listarSocioMasPoderoso(ListaHabilidades listaHabilidades, ArbolSocios arbolSocios) {
+    ListaHabilidades aux = listaHabilidades;
+    ListaHabilidades listaSecundaria = aux;
+    int cantidadMaxima = 0, cantidadHabilidades = 0, cedulaRetornar = 0;
 
     while (listaHabilidades != NULL) {
 
@@ -150,5 +180,5 @@ int socioConMayorCantidadHabilidadesSobrenaturales(ListaHabilidades listaHabilid
         listaHabilidades = listaHabilidades->sig;
     }
 
-    return cedulaRetornar;
+    mostrarSocio(*buscarSocioPorCedula(arbolSocios, cedulaRetornar));
 }

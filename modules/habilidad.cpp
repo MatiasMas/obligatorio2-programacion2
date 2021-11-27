@@ -1,6 +1,6 @@
 #include "habilidad.h"
 
-void cargarHabilidad(Habilidad &habilidad, ArbolSocios arbolSocios) {
+void cargarHabilidad(Habilidad &habilidad, ArbolSocios arbolSocios, Socio &socio) {
     int tipoHabilidad = 0;
     boolean tipoHabilidadIngresada = FALSE;
 
@@ -20,8 +20,9 @@ void cargarHabilidad(Habilidad &habilidad, ArbolSocios arbolSocios) {
     scanf("%i", &habilidad.cedulaMagica);
     fflush(stdin);
 
-    Socio socio = buscarSocioPorCedula(arbolSocios, getCedulaMagica(habilidad));
-    socio.tieneHabilidad = TRUE;
+    Socio *socioP = buscarSocioPorCedula(arbolSocios, getCedulaMagica(habilidad));
+    setTieneHabilidad(*socioP);
+    setTieneHabilidad(socio);
 
     while (tipoHabilidadIngresada == FALSE) {
 

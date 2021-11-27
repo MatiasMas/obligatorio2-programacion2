@@ -4,28 +4,33 @@ void cargarSocio(Socio &socio) {
     boolean categoriaIngresada = FALSE;
     int tipoCategoria;
 
+    setbuf(stdout, 0);
     printf("Ingrese cedula magica: \n");
     scanf("%i", &socio.cedulaMagica);
     fflush(stdin);
 
     socio.tieneHabilidad = FALSE;
 
+    setbuf(stdout, 0);
     printf("Ingrese nombre: \n");
     crearString(socio.nombre);
     cargarString(socio.nombre);
     fflush(stdin);
 
+    setbuf(stdout, 0);
     printf("Ingrese dimension de origen: \n");
     crearString(socio.dimensionOrigen);
     cargarString(socio.dimensionOrigen);
     fflush(stdin);
 
+    setbuf(stdout, 0);
     printf("Ingrese la fecha de nacimiento: \n");
     cargarFecha(socio.fechaNacimiento);
     fflush(stdin);
 
     while (categoriaIngresada == FALSE) {
 
+        setbuf(stdout, 0);
         printf("Seleccione la categoria magica en la que se encuentra: \n");
         printf("1 - BRUJO\n2 - HADA\n3 - HECHICERO \n");
         scanf("%i", &tipoCategoria);
@@ -52,7 +57,7 @@ void cargarSocio(Socio &socio) {
 }
 
 void mostrarSocio(Socio socio) {
-    printf("La cedula magica del socio es: %i, ", getCedulaDelSocio(socio));
+    printf("\nLa cedula magica del socio es: %i, ", getCedulaDelSocio(socio));
     printf("Nombre del socio: ");
     printString(socio.nombre);
     printf(", Dimension de origen del socio: ");
@@ -72,6 +77,7 @@ void mostrarSocio(Socio socio) {
             printf("Hechicero. ");
             break;
     }
+
 }
 
 int getCedulaDelSocio(Socio socio) {
@@ -92,4 +98,8 @@ CategoriaMagica getCategoriaMagica(Socio socio) {
 
 Fecha getFechaRegistro(Socio socio) {
     return socio.fechaNacimiento;
+}
+
+void setTieneHabilidad(Socio &socio) {
+    socio.tieneHabilidad = TRUE;
 }

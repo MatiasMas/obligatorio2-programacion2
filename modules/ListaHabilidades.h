@@ -40,4 +40,7 @@ void listarHabilidadesPorFecha(ListaHabilidades listaHabilidades, Fecha fechaMan
 //Retorna la cedula magica del socio con mayor cantidad de habilidades SOBRENATURALes
 int socioConMayorCantidadHabilidadesSobrenaturales(ListaHabilidades listaHabilidades);
 
+//Lista el Socio con mas habilidades registradas
+void listarSocioMasPoderoso(ListaHabilidades listaHabilidades, ArbolSocios arbolSocios);
+
 #endif //O2P2_LISTAHABILIDADES_H

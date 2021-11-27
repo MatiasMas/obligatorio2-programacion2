@@ -33,22 +33,19 @@ ArbolSocios agregarElementoRaiz(Socio socioRaiz, ArbolSocios subArbolIzq, ArbolS
 boolean existeSocio(ArbolSocios arbolSocios, int cedula);
 
 //Retorna el socio segun la cedula, Precondicion: Arbol no debe estar vacio
-Socio buscarSocioPorCedula(ArbolSocios arbolSocios, int cedulaMagica);
+Socio *buscarSocioPorCedula(ArbolSocios arbolSocios, int cedulaMagica);
 
 //Cuenta los socios en el arbol por categoria, Precondicion: El arbol no debe estar vacio
 void contarSociosPorCategoria(ArbolSocios arbolSocios, int &contadorBrujos, int &contadorHadas, int &contadorHechiceros);
 
 //Cuenta cuantos socios nacieron ANTES de la fecha pasada por parametro, Precondicion: Fecha valida y arbol no vacio
-int sociosNacidosAntesDeFecha(ArbolSocios arbolSocios, Fecha fechaNacimiento);
+void sociosNacidosAntesDeFecha(ArbolSocios arbolSocios, Fecha fechaNacimiento, int &sociosNacidos);
 
 //Lista todos los Socios del arbol ordenados por cedulas de menor a mayor, Precondicion: Arbol no debe estar vacio
 void listarSocios(ArbolSocios arbolSocios);
 
 //Lista todos los socios que no han manisfestado habilidad ninguna, tieneHabilidad = FALSE, Precondicion: Arbol no debe estar vacio
 void listarSociosSinHabilidades(ArbolSocios arbolSocios);
-
-//Lista el Socio con mas habilidades registradas
-void listarSocioMasPoderoso(ArbolSocios arbolSocios);
 
 //Inserta un nuevo socio en el arbol, Precondicion: El socio no existe en el arbol, para eso utilizar el metodo socioIngresado()
 void insertarSocio(ArbolSocios &arbolSocios, Socio socio);
