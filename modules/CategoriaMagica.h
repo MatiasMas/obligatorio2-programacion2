@@ -1,0 +1,6 @@
+#ifndef O2P2_CATEGORIAMAGICA_H
+#define O2P2_CATEGORIAMAGICA_H
+
+typedef enum {BRUJO, HADA, HECHICERO} CategoriaMagica;
+
+#endif //O2P2_CATEGORIAMAGICA_H
