@@ -15,7 +15,7 @@ typedef struct {
 } Socio;
 
 //Cargar socio
-void cargarSocio(Socio &socio);
+void cargarSocio(Socio &socio, int cedulaMagica);
 
 //Mostrar datos del socio
 void mostrarSocio(Socio socio);

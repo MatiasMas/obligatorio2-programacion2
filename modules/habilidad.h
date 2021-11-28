@@ -14,7 +14,7 @@ typedef struct {
 } Habilidad;
 
 //Cargar habilidad, Precondicion: Tiene que existir el socio
-void cargarHabilidad(Habilidad &habilidad, ArbolSocios arbolSocios, Socio &socio);
+void cargarHabilidad(Habilidad &habilidad, int cedulaMagica, ArbolSocios arbolSocios, Socio &socio);
 
 //Desplegar toda la informacion de la habilidad
 void mostrarHabilidad(Habilidad habilidad);

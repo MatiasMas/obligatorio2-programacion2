@@ -1,13 +1,10 @@
 #include "socio.h"
 
-void cargarSocio(Socio &socio) {
+void cargarSocio(Socio &socio, int cedulaMagica) {
     boolean categoriaIngresada = FALSE;
     int tipoCategoria;
 
-    setbuf(stdout, 0);
-    printf("Ingrese cedula magica: \n");
-    scanf("%i", &socio.cedulaMagica);
-    fflush(stdin);
+    socio.cedulaMagica = cedulaMagica;
 
     socio.tieneHabilidad = FALSE;
 
