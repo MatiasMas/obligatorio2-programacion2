@@ -85,3 +85,21 @@ int getCedulaMagica(Habilidad habilidad) {
 TipoHabilidad getTipoHabilidad(Habilidad habilidad) {
     return habilidad.tipoHabilidad;
 }
+
+void bajarHabilidad(Habilidad H, FILE *f) {
+
+    bajarString(H.nombreHabilidad, f);
+//    fwrite (&H.fechaManifestacion, sizeof(Fecha), 1, f);
+    fwrite (&H.cedulaMagica, sizeof(int), 1, f);
+//    fwrite (&H.tipoHabilidad, sizeof(TipoHabilidad), 1, f);
+
+}
+
+void levantarHabilidad(Habilidad &H, FILE *f){
+
+    crearString(H.nombreHabilidad);
+    levantarString(H.nombreHabilidad, f);
+    fread (&H.cedulaMagica, sizeof(long int), 1, f);
+    fread (&H.tipoHabilidad, sizeof(int), 1, f);
+
+}

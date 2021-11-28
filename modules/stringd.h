@@ -36,5 +36,10 @@ boolean stringMenor(stringd s1, stringd s2);
 //Determina si ambos strings son iguales en contenido
 boolean stringIguales(stringd s1, stringd s2);
 
+//Escribe en el archivo los caracteres del string s (incluido '\0'), Precondicion: El archivo debe venir abierto para escritura
+void bajarString(stringd s, FILE *f);
+
+//Lee desde el archivo los caracteres del string s, Precondicion: El archivo debe venir abierto para lectura
+void levantarString(stringd &s, FILE *f);
 
 #endif //O2P2_STRINGD_H

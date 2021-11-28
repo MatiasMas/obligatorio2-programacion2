@@ -43,4 +43,10 @@ int socioConMayorCantidadHabilidadesSobrenaturales(ListaHabilidades listaHabilid
 //Lista el Socio con mas habilidades registradas
 void listarSocioMasPoderoso(ListaHabilidades listaHabilidades, ArbolSocios arbolSocios);
 
+//Escribe en el archivo los datos de todas las habilidades en la lista, Precondicion: El archivo debe venir abierto para escritura
+void bajarLista(ListaHabilidades L, FILE *f);
+
+//Lee desde el archivo los datos de las habilidads en la lista, Precondicion: El archivo debe venir abierto para lectura
+void levantarLista(ListaHabilidades &L, FILE *f);
+
 #endif //O2P2_LISTAHABILIDADES_H

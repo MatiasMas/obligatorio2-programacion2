@@ -16,6 +16,10 @@ int main() {
     crearLista(listaHabilidades);
     crearArbol(arbolSocios);
 
+    FILE *f;
+    f = fopen("C:\\Users\\Matias Mas\\Documents\\CLionProjects\\O2P2\\files\\Habilidad.txt", "wb");
+    levantarHabilidad(habilidad, f);
+
     //Se muestra mensaje de bienvenida al iniciar el programa
     mostrarBienvenida();
 
@@ -28,6 +32,7 @@ int main() {
         switch (opcionMenuPrincipal) {
             case 1:
 //                Agregar socio
+                setbuf(stdout, 0);
                 printf("Ingrese una cedula magica por favor: \n");
                 scanf("%i", &cedulaMagica);
                 fflush(stdin);
@@ -46,11 +51,15 @@ int main() {
                 break;
             case 2:
 //                Agregar habilidad
+                setbuf(stdout, 0);
                 printf("Ingrese una cedula magica por favor: \n");
                 scanf("%i", &cedulaMagica);
+                fflush(stdin);
                 if (existeSocio(arbolSocios, cedulaMagica)){
                     cargarHabilidad(habilidad, cedulaMagica, arbolSocios, socio);
-                    if (esValida(habilidad.fechaManifestacion) && primeraFechaMenorQueSegundaFecha(getFechaManifestacion(obtenerPrimerElemento(listaHabilidades)), habilidad.fechaManifestacion)){
+                    if (esVacia(listaHabilidades) && esValida(habilidad.fechaManifestacion)){
+                        insertarElemento(listaHabilidades, habilidad);
+                    } else if (esValida(habilidad.fechaManifestacion) && primeraFechaMenorQueSegundaFecha(getFechaManifestacion(obtenerPrimerElemento(listaHabilidades)), habilidad.fechaManifestacion)){
                         insertarElemento(listaHabilidades, habilidad);
                     } else {
                         printf("\nLa fecha ingresada no es valida, vuelva a intentar.\n");
@@ -133,6 +142,7 @@ int main() {
                             if (!esVacia(listaHabilidades)){
                                 printf("Ingrese una cedula magica por favor: \n");
                                 scanf("%i", &cedulaMagica);
+                                fflush(stdin);
                                 if (existeSocio(arbolSocios, cedulaMagica)){
                                     listarHabilidadesPorCedula(listaHabilidades, cedulaMagica);
                                 } else {
@@ -178,4 +188,7 @@ int main() {
                 break;
         }
     }
+
+    bajarHabilidad(habilidad, f);
+    fclose(f);
 }

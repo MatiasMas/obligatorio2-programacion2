@@ -135,3 +135,30 @@ boolean stringIguales(stringd s1, stringd s2) {
     return iguales;
 }
 
+void bajarString(stringd s, FILE *f) {
+
+    int i = 0;
+    while (s[i] != '\0') {
+        fwrite(&s[i], sizeof(char), 1, f);
+        i++;
+    }
+    // escribo el '\0'
+    fwrite(&s[i], sizeof(char), 1, f);
+
+}
+
+void levantarString(stringd &s, FILE *f) {
+    int i = 0;
+    stringd aux;
+
+    aux = new char[MAX];
+    fread(&aux[i], sizeof(char), 1, f);
+
+    while (!feof(f) && (aux[i] != '\0')) {
+        i++;
+        fread(&aux[i], sizeof(char), 1, f);
+    }
+
+    copiarString(s, aux);
+    delete[] aux;
+}

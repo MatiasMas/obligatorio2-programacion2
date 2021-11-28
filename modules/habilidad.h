@@ -31,4 +31,10 @@ int getCedulaMagica(Habilidad habilidad);
 //Selectora de tipo de habilidad
 TipoHabilidad getTipoHabilidad(Habilidad habilidad);
 
+//Escribe en el archivo los datos de la habilidad H, Precondicion: El archivo debe venir abierto para escritura
+void bajarHabilidad(Habilidad H, FILE *f);
+
+//Lee desde el archivo los datos de la habilidad H, Precondicion: El archivo debe venir abierto para lectura
+void levantarHabilidad(Habilidad &H, FILE *f);
+
 #endif //O2P2_HABILIDAD_H

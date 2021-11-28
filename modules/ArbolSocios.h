@@ -62,4 +62,13 @@ void borrarSocioConMenorCedula(ArbolSocios &arbolSocios);
 //Borra el socio pasado por parametro del arbol
 void borrarSocio(ArbolSocios &arbolSocios, Socio socio);
 
+// Escribe en el archivo los datos de todos los Socios del árbol en forma recursiva, Precondición: El archivo viene abierto para escritura
+void bajarArbolAux (ArbolSocios arbolSocios, FILE * f);
+
+// Abre el archivo para escritura y escribe los datos de todos los Socios del árbol (llamando al procedimiento anterior)
+void bajarArbol (ArbolSocios arbolSocios, stringd nombreArchivo);
+
+// Abre el archivo para lectura e inserta en el árbol todos los Socios que están en el archivo (llamando al procedimiento insertar), Precondición: El archivo existe.
+void levantarArbol (ArbolSocios &arbolSocios, stringd nombreArchivo);
+
 #endif //O2P2_ARBOLSOCIOS_H
